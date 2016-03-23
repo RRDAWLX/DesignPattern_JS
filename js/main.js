@@ -24,8 +24,9 @@ requirejs(['Extend'], function(Extend){
 	console.log(new Date() - start);
 	
 	start = +new Date();
-	var deepClone = Extend.deepCloneTail(obj);
-	console.log('deep clone: ');
-	console.log(deepClone);
+	var deepCloneTail = Extend.deepCloneTail(obj);
+	console.log('deep clone tail: ');
+	console.log(	var deepCloneTail = Extend.deepCloneTail(obj);
+);
 	console.log(new Date() - start);
 });
