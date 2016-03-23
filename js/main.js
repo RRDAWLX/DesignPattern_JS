@@ -16,11 +16,16 @@ requirejs(['Extend'], function(Extend){
 	console.log('obj:');
 	console.log(obj);
 	
-	var clone = Extend.clone(obj);
-	console.log('clone: ');
-	console.log(clone);
+	var start = +new Date();
 	
 	var deepClone = Extend.deepClone(obj);
 	console.log('deep clone: ');
 	console.log(deepClone);
+	console.log(new Date() - start);
+	
+	start = +new Date();
+	var deepClone = Extend.deepCloneTail(obj);
+	console.log('deep clone: ');
+	console.log(deepClone);
+	console.log(new Date() - start);
 });

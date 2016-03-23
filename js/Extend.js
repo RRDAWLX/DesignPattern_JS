@@ -39,6 +39,27 @@ define(function(){
 			}
 			
 			return sub;
+		},
+		
+		deepCloneTail: function (obj, preObj, index) {
+			var Sub = function () {};
+			Sub.prototype = obj;
+			var sub = new Sub();
+			
+			for(var i in obj){
+				if(obj.hasOwnProperty(i)){
+					if(obj[i] !== null && typeof obj[i] == 'object'){	// 只对 Object 和 Array 进行深复制
+						if(Object.prototype.toString.call(obj[i]) == '[object Array]'){
+							sub[i] = obj[i].concat();
+						}else{
+							if
+							arguments.callee(obj[i], sub[i]);
+						}
+					}
+				}
+			}
+			
+			return sub;
 		}
 	};
 	
