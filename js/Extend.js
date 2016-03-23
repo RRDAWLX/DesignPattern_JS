@@ -41,25 +41,22 @@ define(function(){
 			return sub;
 		},
 		
-		deepCloneTail: function (obj, preObj, index) {
-			var Sub = function () {};
-			Sub.prototype = obj;
-			var sub = new Sub();
-			
-			for(var i in obj){
-				if(obj.hasOwnProperty(i)){
-					if(obj[i] !== null && typeof obj[i] == 'object'){	// 只对 Object 和 Array 进行深复制
-						if(Object.prototype.toString.call(obj[i]) == '[object Array]'){
-							sub[i] = obj[i].concat();
-						}else{
-							if
-							arguments.callee(obj[i], sub[i]);
-						}
+		/* 原型链继承：深复制 尾递归实现 */
+		//deepCloneTail: function (obj) {}
+		
+		/* 扩充 */
+		augment: function (receivingClass, givingClass) {
+			if(arguments[2]){
+				for(var i = 2, len = arguments.length; i < len; i++) {
+					receivingClass.prototype[arguments[i]] = givingClass.prototype[arguments[i]];
+				}
+			}else{
+				for(var methodName in givingClass.prototype){
+					if(!receivingClass.prototype[methodName]){
+						receivingClass.prototype[methodName] = givingClass.prototype[methodName];
 					}
 				}
 			}
-			
-			return sub;
 		}
 	};
 	
