@@ -6,26 +6,26 @@ define(function(){
 			Super.prototype = superClass.prototype;
 			subClass.prototype = new Super();
 			subClass.prototype.constructor = subClass;
-			
+
 			subClass.superClass = superClass.prototype;		// 为什么不是 subClass.superClass = superClass?
 			if(superClass.prototype.constructor == Object.prototype.contructor){
 				superClass.prototype.constructor = superClass;
 			}
 		},
-		
+
 		/* 原型链继承：浅复制 */
 		clone: function (obj) {
 			var Sub = function () {};
 			Sub.prototype = obj;
 			return new Sub();
 		},
-		
+
 		/* 原型链继承：深复制 */
 		deepClone: function (obj) {
 			var Sub = function () {};
 			Sub.prototype = obj;
 			var sub = new Sub();
-			
+
 			for(var i in obj){
 				if(obj.hasOwnProperty(i)){
 					if(obj[i] !== null && typeof obj[i] == 'object'){	// 只对 Object 和 Array 进行深复制
@@ -37,13 +37,13 @@ define(function(){
 					}
 				}
 			}
-			
+
 			return sub;
 		},
-		
+
 		/* 原型链继承：深复制 尾递归实现 */
 		//deepCloneTail: function (obj) {}
-		
+
 		/* 扩充 */
 		augment: function (receivingClass, givingClass) {
 			if(arguments[2]){
@@ -59,6 +59,29 @@ define(function(){
 			}
 		}
 	};
-	
+
+
+	// test
+	var obj = {
+		a: 'a',
+		1: 1,
+		arr: [1, 'a'],
+		b: null,
+		c: undefined,
+		d: true,
+		f: function () {},
+		r: /^abc$/g,
+		o: {
+			t: 5
+		}
+	}
+
+	console.log('obj:');
+	console.log(obj);
+
+	var deepClone = Extend.deepClone(obj);
+	console.log('deep clone: ');
+	console.log(deepClone);
+
 	return Extend;
 });
